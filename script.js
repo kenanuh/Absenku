@@ -11,6 +11,7 @@ function renderAbsensi() {
     const table =
         document.getElementById("absensiTable");
 
+
     if (!table) {
         return;
     }
@@ -31,11 +32,17 @@ function renderAbsensi() {
     if (absensi.length === 0) {
 
         table.innerHTML = `
+
             <tr>
-                <td colspan="5">
+
+                <td colspan="3">
+
                     Belum ada absensi.
+
                 </td>
+
             </tr>
+
         `;
 
         return;
@@ -44,9 +51,11 @@ function renderAbsensi() {
 
 
     table.innerHTML =
+
         [...absensi]
         .reverse()
-        .map(function(item, reverseIndex) {
+        .map(function(item) {
+
 
             const siswaData =
                 siswa.find(function(s) {
@@ -58,60 +67,61 @@ function renderAbsensi() {
 
             const namaSiswa =
                 siswaData
-                    ? escapeHtml(siswaData.nama)
+                    ? escapeHtml(
+                        siswaData.nama
+                    )
                     : "Siswa dihapus";
 
 
-            let alasan = "-";
+            const linkDetail =
 
+                siswaData
 
-            if (
-                item.status === "Izin" ||
-                item.status === "Sakit"
-            ) {
+                ?
 
-                alasan =
-                    item.alasan
-                        ? escapeHtml(item.alasan)
-                        : "-";
+                `
+                detail_absensi.html?siswaId=${encodeURIComponent(
+                    item.siswaId
+                )}&tanggal=${encodeURIComponent(
+                    item.tanggal
+                )}
+                `
 
-            }
+                :
 
+                "#";
 
-            const indexAsli =
-                absensi.length -
-                1 -
-                reverseIndex;
 
 
             return `
 
-                <tr>
+                <tr
+                    style="cursor:pointer"
+                    onclick="window.location.href='${linkDetail}'"
+                    title="Klik untuk melihat detail absensi"
+                >
 
                     <td>
-                        ${escapeHtml(item.tanggal)}
+
+                        ${escapeHtml(
+                            item.tanggal
+                        )}
+
                     </td>
 
+
                     <td>
+
                         ${namaSiswa}
+
                     </td>
 
-                    <td>
-                        ${escapeHtml(item.status)}
-                    </td>
-
-                    <td>
-                        ${alasan}
-                    </td>
 
                     <td>
 
-                        <button
-                            class="danger"
-                            onclick="hapusAbsensi(${indexAsli})"
-                        >
-                            Hapus
-                        </button>
+                        ${escapeHtml(
+                            item.status
+                        )}
 
                     </td>
 
@@ -120,6 +130,7 @@ function renderAbsensi() {
             `;
 
         })
+
         .join("");
 
 }
