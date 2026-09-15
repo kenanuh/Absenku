@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="id">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Edit Siswa</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<script src="script.js"></script><script>requireLogin();</script><nav class="navbar"></nav>
+<main class="container"><section class="header"><h1>Edit Siswa</h1></section>
+<div class="panel"><form id="editForm"><div class="form-grid"><div><label>NIS</label><input id="nis" required></div><div><label>Nama</label><input id="nama" required></div><div><label>Kelas</label><input id="kelas" required></div></div><button type="submit">Simpan Perubahan</button> <a class="btn secondary" href="tampil_siswa.html">Batal</a></form></div></main>
+<script>
+renderNavbar(); const id=new URLSearchParams(location.search).get("id"); let data=JSON.parse(localStorage.getItem("siswa")||"[]"); let s=data.find(x=>x.id===id);
+if(!s){alert("Data siswa tidak ditemukan.");location.href="tampil_siswa.html";} else {nis.value=s.nis;nama.value=s.nama;kelas.value=s.kelas;}
+editForm.addEventListener("submit",function(e){e.preventDefault();s.nis=nis.value.trim();s.nama=nama.value.trim();s.kelas=kelas.value.trim();localStorage.setItem("siswa",JSON.stringify(data));location.href="tampil_siswa.html";});
+</script>
+</body></html>

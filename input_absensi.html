@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="id">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Input Absensi</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<script src="script.js"></script><script>requireLogin();</script>
+<nav class="navbar"></nav>
+<main class="container">
+<section class="header"><h1>Input Absensi</h1><p>Catat kehadiran siswa.</p></section>
+<div class="panel">
+<form id="absensiForm">
+<div class="form-grid">
+<div><label>Siswa</label><select id="siswa" required></select></div>
+<div><label>Tanggal</label><input id="tanggal" type="date" required></div>
+<div><label>Status</label><select id="status"><option>Hadir</option><option>Izin</option><option>Sakit</option><option>Alpa</option></select></div>
+</div>
+<button type="submit">Simpan Absensi</button>
+</form>
+</div>
+<div class="panel"><h2>Riwayat Absensi</h2><div class="table-wrap"><table><thead><tr><th>Tanggal</th><th>Siswa</th><th>Status</th><th>Aksi</th></tr></thead><tbody id="absensiTable"></tbody></table></div></div>
+</main>
+<script>
+renderNavbar(); loadSiswaOptions(); document.getElementById("tanggal").value=today();
+document.getElementById("absensiForm").addEventListener("submit", function(e){
+ e.preventDefault(); const siswa=JSON.parse(localStorage.getItem("siswa")||"[]"); const id=document.getElementById("siswa").value;
+ const abs=JSON.parse(localStorage.getItem("absensi")||"[]"); const idx=abs.findIndex(x=>x.siswaId===id&&x.tanggal===document.getElementById("tanggal").value);
+ const rec={siswaId:id,tanggal:document.getElementById("tanggal").value,status:document.getElementById("status").value};
+ if(idx>=0) abs[idx]=rec; else abs.push(rec); localStorage.setItem("absensi",JSON.stringify(abs)); this.reset(); document.getElementById("tanggal").value=today(); loadSiswaOptions(); renderAbsensi();
+});
+renderAbsensi();
+</script>
+</body></html>

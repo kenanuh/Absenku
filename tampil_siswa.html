@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="id">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Data Siswa</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<script src="script.js"></script><script>requireLogin();</script>
+<nav class="navbar"></nav>
+<main class="container">
+<section class="header"><h1>Data Siswa</h1><p>Kelola data siswa.</p></section>
+<div class="panel"><a class="btn" href="tambah_siswa.html">+ Tambah Siswa</a><div class="table-wrap"><table><thead><tr><th>No</th><th>NIS</th><th>Nama</th><th>Kelas</th><th>Aksi</th></tr></thead><tbody id="siswaTable"></tbody></table></div></div>
+</main>
+<script>renderNavbar(); renderSiswa();</script>
+</body></html>
