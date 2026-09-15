@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Detail Absensi - Absenku</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+    <style>
+
+        .detail-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            max-width: 800px;
+        }
+
+        .detail-row {
+            display: grid;
+            grid-template-columns: 180px 1fr;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .detail-label {
+            font-weight: bold;
+            color: #555;
+        }
+
+        .detail-value {
+            color: #222;
+        }
+
+        .alasan-box {
+            margin-top: 25px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #007bff;
+        }
+
+        .alasan-box h3 {
+            margin-top: 0;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 11px 18px;
+            background: #6c757d;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+
+        .back-button:hover {
+            background: #5a6268;
+        }
+
+        .not-found {
+            background: #f8d7da;
+            color: #842029;
+            padding: 15px;
+            border-radius: 6px;
+        }
+
+        @media (max-width: 600px) {
+
+            .detail-row {
+                grid-template-columns: 1fr;
+                gap: 5px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<script src="script.js"></script>
+
+<script>
+    requireLogin();
+</script>
+
+
+<nav class="navbar"></nav>
+
+
+<main class="container">
+
+
+    <section class="header">
+
+        <h1>
+            Detail Absensi
+        </h1>
+
+        <p>
+            Informasi lengkap absensi siswa.
+        </p>
+
+    </section>
+
+
+    <div
+        id="detailContainer"
+        class="detail-card"
+    >
+
+        Memuat data...
+
+    </div>
+
+
+</main>
+
+
+
+<script>
+
+
+    renderNavbar();
+
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+
+    const siswaId =
+        params.get("siswaId");
+
+
+    const tanggal =
+        params.get("tanggal");
+
+
+    const siswa =
+        JSON.parse(
+            localStorage.getItem("siswa") || "[]"
+        );
+
+
+    const absensi =
+        JSON.parse(
+            localStorage.getItem("absensi") || "[]"
+        );
+
+    const siswaData =
+        siswa.find(function(item) {
+
+            return item.id === siswaId;
+
+        });
+
+
+    const absensiData =
+        absensi.find(function(item) {
+
+            return (
+                item.siswaId === siswaId &&
+                item.tanggal === tanggal
+            );
+
+        });
+
+
+
+    const container =
+        document.getElementById(
+            "detailContainer"
+        );
+
+
+    if (!siswaData || !absensiData) {
+
+        container.innerHTML = `
+
+            <div class="not-found">
+
+                Data absensi tidak ditemukan.
+
+            </div>
+
+            <a
+                href="input_absensi.html"
+                class="back-button"
+            >
+                ← Kembali
+            </a>
+
+        `;
+
+    } else {
+
+
+        let alasan =
+            "-";
+
+
+        if (
+            absensiData.status === "Izin" ||
+            absensiData.status === "Sakit"
+        ) {
+
+            alasan =
+                absensiData.alasan
+                    ? escapeHtml(
+                        absensiData.alasan
+                    )
+                    : "Tidak ada alasan.";
+
+        }
+
+
+        container.innerHTML = `
+
+            <div class="detail-row">
+
+                <div class="detail-label">
+                    Nama Siswa
+                </div>
+
+                <div class="detail-value">
+                    ${escapeHtml(
+                        siswaData.nama
+                    )}
+                </div>
+
+            </div>
+
+
+            <div class="detail-row">
+
+                <div class="detail-label">
+                    NIS
+                </div>
+
+                <div class="detail-value">
+                    ${escapeHtml(
+                        siswaData.nis
+                    )}
+                </div>
+
+            </div>
+
+
+            <div class="detail-row">
+
+                <div class="detail-label">
+                    Kelas
+                </div>
+
+                <div class="detail-value">
+                    ${escapeHtml(
+                        siswaData.kelas
+                    )}
+                </div>
+
+            </div>
+
+
+            <div class="detail-row">
+
+                <div class="detail-label">
+                    Tanggal
+                </div>
+
+                <div class="detail-value">
+                    ${escapeHtml(
+                        absensiData.tanggal
+                    )}
+                </div>
+
+            </div>
+
+
+            <div class="detail-row">
+
+                <div class="detail-label">
+                    Status
+                </div>
+
+                <div class="detail-value">
+                    ${escapeHtml(
+                        absensiData.status
+                    )}
+                </div>
+
+            </div>
+
+
+            <div class="alasan-box">
+
+                <h3>
+                    Alasan
+                </h3>
+
+                <p>
+                    ${alasan}
+                </p>
+
+            </div>
+
+
+            <a
+                href="input_absensi.html"
+                class="back-button"
+            >
+                ← Kembali ke Riwayat
+            </a>
+
+        `;
+
+    }
+
+</script>
+
+
+</body>
+
+</html>
