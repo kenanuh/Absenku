@@ -1,31 +1,433 @@
 <!DOCTYPE html>
 <html lang="id">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Input Absensi</title><link rel="stylesheet" href="style.css"></head>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Input Absensi - Absensi Siswa</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .reason-group {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .reason-group.hidden {
+            display: none;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            resize: vertical;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+
+        .reason-info {
+            display: block;
+            margin-top: 6px;
+            color: #777;
+            font-size: 13px;
+        }
+    </style>
+</head>
+
 <body>
-<script src="script.js"></script><script>requireLogin();</script>
-<nav class="navbar"></nav>
-<main class="container">
-<section class="header"><h1>Input Absensi</h1><p>Catat kehadiran siswa.</p></section>
-<div class="panel">
-<form id="absensiForm">
-<div class="form-grid">
-<div><label>Siswa</label><select id="siswa" required></select></div>
-<div><label>Tanggal</label><input id="tanggal" type="date" required></div>
-<div><label>Status</label><select id="status"><option>Hadir</option><option>Izin</option><option>Sakit</option><option>Alpa</option></select></div>
-</div>
-<button type="submit">Simpan Absensi</button>
-</form>
-</div>
-<div class="panel"><h2>Riwayat Absensi</h2><div class="table-wrap"><table><thead><tr><th>Tanggal</th><th>Siswa</th><th>Status</th><th>Aksi</th></tr></thead><tbody id="absensiTable"></tbody></table></div></div>
-</main>
+
+<script src="script.js"></script>
+
 <script>
-renderNavbar(); loadSiswaOptions(); document.getElementById("tanggal").value=today();
-document.getElementById("absensiForm").addEventListener("submit", function(e){
- e.preventDefault(); const siswa=JSON.parse(localStorage.getItem("siswa")||"[]"); const id=document.getElementById("siswa").value;
- const abs=JSON.parse(localStorage.getItem("absensi")||"[]"); const idx=abs.findIndex(x=>x.siswaId===id&&x.tanggal===document.getElementById("tanggal").value);
- const rec={siswaId:id,tanggal:document.getElementById("tanggal").value,status:document.getElementById("status").value};
- if(idx>=0) abs[idx]=rec; else abs.push(rec); localStorage.setItem("absensi",JSON.stringify(abs)); this.reset(); document.getElementById("tanggal").value=today(); loadSiswaOptions(); renderAbsensi();
-});
-renderAbsensi();
+    requireLogin();
 </script>
-</body></html>
+
+<nav class="navbar"></nav>
+
+<main class="container">
+
+    <section class="header">
+
+        <h1>Input Absensi</h1>
+
+        <p>
+            Catat kehadiran siswa.
+        </p>
+
+    </section>
+
+
+    <div class="panel">
+
+        <form id="absensiForm">
+
+            <div class="form-grid">
+
+                <div>
+
+                    <label for="siswa">
+                        Siswa
+                    </label>
+
+                    <select
+                        id="siswa"
+                        required
+                    ></select>
+
+                </div>
+
+
+                <div>
+
+                    <label for="tanggal">
+                        Tanggal
+                    </label>
+
+                    <input
+                        type="date"
+                        id="tanggal"
+                        required
+                    >
+
+                </div>
+
+
+                <div>
+
+                    <label for="status">
+                        Status
+                    </label>
+
+                    <select
+                        id="status"
+                        required
+                    >
+
+                        <option value="Hadir">
+                            Hadir
+                        </option>
+
+                        <option value="Izin">
+                            Izin
+                        </option>
+
+                        <option value="Sakit">
+                            Sakit
+                        </option>
+
+                        <option value="Alpa">
+                            Alpa
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+            <div
+                id="alasanGroup"
+                class="reason-group hidden"
+            >
+
+                <label for="alasan">
+                    Alasan
+                </label>
+
+                <textarea
+                    id="alasan"
+                    placeholder="Tuliskan alasan izin atau sakit..."
+                ></textarea>
+
+                <small class="reason-info">
+                    Alasan wajib diisi jika status Izin atau Sakit.
+                </small>
+
+            </div>
+
+
+            <button type="submit">
+                Simpan Absensi
+            </button>
+
+        </form>
+
+    </div>
+
+
+
+    <div class="panel">
+
+        <h2>
+            Riwayat Absensi
+        </h2>
+
+        <div class="table-wrap">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Tanggal
+                        </th>
+
+                        <th>
+                            Siswa
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                        <th>
+                            Alasan
+                        </th>
+
+                        <th>
+                            Aksi
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="absensiTable">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+
+<script>
+
+
+
+    renderNavbar();
+
+
+
+
+    loadSiswaOptions();
+
+
+
+    document.getElementById("tanggal").value = today();
+
+
+
+    const statusElement =
+        document.getElementById("status");
+
+    const alasanGroup =
+        document.getElementById("alasanGroup");
+
+    const alasanElement =
+        document.getElementById("alasan");
+
+
+
+    function updateAlasanField() {
+
+        const status =
+            statusElement.value;
+
+        const membutuhkanAlasan =
+            status === "Izin" ||
+            status === "Sakit";
+
+
+        if (membutuhkanAlasan) {
+
+            alasanGroup.classList.remove("hidden");
+
+            alasanElement.required = true;
+
+        } else {
+
+            alasanGroup.classList.add("hidden");
+
+            alasanElement.required = false;
+
+            alasanElement.value = "";
+
+        }
+
+    }
+
+
+    statusElement.addEventListener(
+        "change",
+        updateAlasanField
+    );
+
+
+
+    updateAlasanField();
+
+
+
+
+    document
+        .getElementById("absensiForm")
+        .addEventListener(
+            "submit",
+            function(event) {
+
+                event.preventDefault();
+
+
+                const siswaId =
+                    document.getElementById("siswa").value;
+
+                const tanggal =
+                    document.getElementById("tanggal").value;
+
+                const status =
+                    statusElement.value;
+
+                const alasan =
+                    alasanElement.value.trim();
+
+
+
+                if (!siswaId) {
+
+                    alert(
+                        "Silakan tambahkan siswa terlebih dahulu."
+                    );
+
+                    return;
+
+                }
+
+
+                if (
+                    (status === "Izin" ||
+                    status === "Sakit") &&
+                    alasan === ""
+                ) {
+
+                    alert(
+                        "Alasan wajib diisi untuk status Izin atau Sakit."
+                    );
+
+                    alasanElement.focus();
+
+                    return;
+
+                }
+
+
+
+                const absensi =
+                    JSON.parse(
+                        localStorage.getItem("absensi") || "[]"
+                    );
+
+
+
+                const index =
+                    absensi.findIndex(function(item) {
+
+                        return (
+                            item.siswaId === siswaId &&
+                            item.tanggal === tanggal
+                        );
+
+                    });
+
+
+                const dataAbsensi = {
+
+                    siswaId: siswaId,
+
+                    tanggal: tanggal,
+
+                    status: status,
+
+                    alasan:
+                        (
+                            status === "Izin" ||
+                            status === "Sakit"
+                        )
+                        ? alasan
+                        : ""
+
+                };
+
+
+                if (index >= 0) {
+
+                    absensi[index] =
+                        dataAbsensi;
+
+                } else {
+
+                    absensi.push(
+                        dataAbsensi
+                    );
+
+                }
+
+
+                localStorage.setItem(
+                    "absensi",
+                    JSON.stringify(absensi)
+                );
+
+
+                alert(
+                    "Absensi berhasil disimpan."
+                );
+
+
+
+                this.reset();
+
+
+                document.getElementById(
+                    "tanggal"
+                ).value = today();
+
+
+                updateAlasanField();
+
+
+
+                loadSiswaOptions();
+
+                renderAbsensi();
+
+            }
+        );
+
+
+
+    renderAbsensi();
+
+</script>
+
+</body>
+
+</html>
