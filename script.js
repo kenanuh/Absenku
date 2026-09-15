@@ -6,5 +6,121 @@ function updateDashboard(){const s=JSON.parse(localStorage.getItem("siswa")||"[]
 function renderSiswa(){const t=document.getElementById("siswaTable"),s=JSON.parse(localStorage.getItem("siswa")||"[]");t.innerHTML=s.length?s.map((x,i)=>`<tr><td>${i+1}</td><td>${escapeHtml(x.nis)}</td><td>${escapeHtml(x.nama)}</td><td>${escapeHtml(x.kelas)}</td><td><a class="btn" href="edit_siswa.html?id=${encodeURIComponent(x.id)}">Edit</a> <button class="danger" onclick="hapusSiswa('${x.id}')">Hapus</button></td></tr>`).join(""):`<tr><td colspan="5">Belum ada data siswa.</td></tr>`}
 function hapusSiswa(id){if(!confirm("Hapus siswa ini?"))return;let s=JSON.parse(localStorage.getItem("siswa")||"[]").filter(x=>x.id!==id);let a=JSON.parse(localStorage.getItem("absensi")||"[]").filter(x=>x.siswaId!==id);localStorage.setItem("siswa",JSON.stringify(s));localStorage.setItem("absensi",JSON.stringify(a));renderSiswa()}
 function loadSiswaOptions(){const el=document.getElementById("siswa");if(!el)return;const s=JSON.parse(localStorage.getItem("siswa")||"[]");el.innerHTML=s.length?s.map(x=>`<option value="${x.id}">${escapeHtml(x.nis)} - ${escapeHtml(x.nama)}</option>`).join(""):`<option value="">Belum ada siswa</option>`}
-function renderAbsensi(){const t=document.getElementById("absensiTable"),s=JSON.parse(localStorage.getItem("siswa")||"[]"),a=JSON.parse(localStorage.getItem("absensi")||"[]");t.innerHTML=a.length?[...a].reverse().map((x,i)=>{const st=s.find(y=>y.id===x.siswaId);return `<tr><td>${x.tanggal}</td><td>${st?escapeHtml(st.nama):"Siswa dihapus"}</td><td>${escapeHtml(x.status)}</td><td><button class="danger" onclick="hapusAbsensi(${a.length-1-i})">Hapus</button></td></tr>`}).join(""):`<tr><td colspan="4">Belum ada absensi.</td></tr>`}
+function renderAbsensi() {
+
+    const table =
+        document.getElementById("absensiTable");
+
+    if (!table) {
+        return;
+    }
+
+
+    const siswa =
+        JSON.parse(
+            localStorage.getItem("siswa") || "[]"
+        );
+
+
+    const absensi =
+        JSON.parse(
+            localStorage.getItem("absensi") || "[]"
+        );
+
+
+    if (absensi.length === 0) {
+
+        table.innerHTML = `
+            <tr>
+                <td colspan="5">
+                    Belum ada absensi.
+                </td>
+            </tr>
+        `;
+
+        return;
+
+    }
+
+
+    table.innerHTML =
+        [...absensi]
+        .reverse()
+        .map(function(item, reverseIndex) {
+
+            const siswaData =
+                siswa.find(function(s) {
+
+                    return s.id === item.siswaId;
+
+                });
+
+
+            const namaSiswa =
+                siswaData
+                    ? escapeHtml(siswaData.nama)
+                    : "Siswa dihapus";
+
+
+            let alasan = "-";
+
+
+            if (
+                item.status === "Izin" ||
+                item.status === "Sakit"
+            ) {
+
+                alasan =
+                    item.alasan
+                        ? escapeHtml(item.alasan)
+                        : "-";
+
+            }
+
+
+            const indexAsli =
+                absensi.length -
+                1 -
+                reverseIndex;
+
+
+            return `
+
+                <tr>
+
+                    <td>
+                        ${escapeHtml(item.tanggal)}
+                    </td>
+
+                    <td>
+                        ${namaSiswa}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(item.status)}
+                    </td>
+
+                    <td>
+                        ${alasan}
+                    </td>
+
+                    <td>
+
+                        <button
+                            class="danger"
+                            onclick="hapusAbsensi(${indexAsli})"
+                        >
+                            Hapus
+                        </button>
+
+                    </td>
+
+                </tr>
+
+            `;
+
+        })
+        .join("");
+
+}
 function hapusAbsensi(index){let a=JSON.parse(localStorage.getItem("absensi")||"[]");a.splice(index,1);localStorage.setItem("absensi",JSON.stringify(a));renderAbsensi()}
