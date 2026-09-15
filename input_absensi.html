@@ -2,14 +2,20 @@
 <html lang="id">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Input Absensi - Absensi Siswa</title>
 
     <link rel="stylesheet" href="style.css">
 
     <style>
+
         .reason-group {
             margin-top: 20px;
             margin-bottom: 20px;
@@ -41,10 +47,14 @@
             color: #777;
             font-size: 13px;
         }
+
     </style>
+
 </head>
 
+
 <body>
+
 
 <script src="script.js"></script>
 
@@ -52,13 +62,18 @@
     requireLogin();
 </script>
 
+
 <nav class="navbar"></nav>
+
 
 <main class="container">
 
+
     <section class="header">
 
-        <h1>Input Absensi</h1>
+        <h1>
+            Input Absensi
+        </h1>
 
         <p>
             Catat kehadiran siswa.
@@ -71,7 +86,29 @@
 
         <form id="absensiForm">
 
+
             <div class="form-grid">
+
+
+                <div>
+
+                    <label for="kelas">
+                        Kelas
+                    </label>
+
+                    <select
+                        id="kelas"
+                        required
+                    >
+
+                        <option value="">
+                            Pilih Kelas
+                        </option>
+
+                    </select>
+
+                </div>
+
 
                 <div>
 
@@ -82,7 +119,14 @@
                     <select
                         id="siswa"
                         required
-                    ></select>
+                        disabled
+                    >
+
+                        <option value="">
+                            Pilih kelas terlebih dahulu
+                        </option>
+
+                    </select>
 
                 </div>
 
@@ -133,7 +177,9 @@
 
                 </div>
 
+
             </div>
+
 
             <div
                 id="alasanGroup"
@@ -156,9 +202,11 @@
             </div>
 
 
+
             <button type="submit">
                 Simpan Absensi
             </button>
+
 
         </form>
 
@@ -166,11 +214,14 @@
 
 
 
+    <!-- RIWAYAT -->
+
     <div class="panel">
 
         <h2>
             Riwayat Absensi
         </h2>
+
 
         <div class="table-wrap">
 
@@ -192,14 +243,6 @@
                             Status
                         </th>
 
-                        <th>
-                            Alasan
-                        </th>
-
-                        <th>
-                            Aksi
-                        </th>
-
                     </tr>
 
                 </thead>
@@ -215,6 +258,7 @@
 
     </div>
 
+
 </main>
 
 
@@ -222,29 +266,168 @@
 <script>
 
 
-
     renderNavbar();
 
 
+    const kelasElement =
+        document.getElementById("kelas");
 
-
-    loadSiswaOptions();
-
-
-
-    document.getElementById("tanggal").value = today();
-
-
+    const siswaElement =
+        document.getElementById("siswa");
 
     const statusElement =
         document.getElementById("status");
 
-    const alasanGroup =
-        document.getElementById("alasanGroup");
-
     const alasanElement =
         document.getElementById("alasan");
 
+    const alasanGroup =
+        document.getElementById("alasanGroup");
+
+
+    document.getElementById("tanggal").value =
+        today();
+
+
+    function loadKelas() {
+
+        const siswa =
+            JSON.parse(
+                localStorage.getItem("siswa") || "[]"
+            );
+
+
+        const kelasList =
+            [...new Set(
+                siswa.map(function(item) {
+                    return item.kelas;
+                })
+            )]
+            .filter(function(kelas) {
+                return kelas;
+            })
+            .sort();
+
+
+        kelasElement.innerHTML = `
+            <option value="">
+                Pilih Kelas
+            </option>
+        `;
+
+
+        kelasList.forEach(function(kelas) {
+
+            const option =
+                document.createElement("option");
+
+            option.value = kelas;
+
+            option.textContent = kelas;
+
+            kelasElement.appendChild(option);
+
+        });
+
+    }
+
+
+    function loadSiswaByKelas() {
+
+        const kelas =
+            kelasElement.value;
+
+
+        siswaElement.innerHTML = "";
+
+
+        if (!kelas) {
+
+            siswaElement.disabled = true;
+
+            const option =
+                document.createElement("option");
+
+            option.value = "";
+
+            option.textContent =
+                "Pilih kelas terlebih dahulu";
+
+            siswaElement.appendChild(option);
+
+            return;
+
+        }
+
+
+        const siswa =
+            JSON.parse(
+                localStorage.getItem("siswa") || "[]"
+            );
+
+
+        const siswaKelas =
+            siswa.filter(function(item) {
+
+                return item.kelas === kelas;
+
+            });
+
+
+        siswaElement.disabled = false;
+
+
+        const defaultOption =
+            document.createElement("option");
+
+        defaultOption.value = "";
+
+        defaultOption.textContent =
+            "Pilih Siswa";
+
+        siswaElement.appendChild(
+            defaultOption
+        );
+
+
+        siswaKelas.forEach(function(item) {
+
+            const option =
+                document.createElement("option");
+
+            option.value = item.id;
+
+            option.textContent =
+                item.nis + " - " + item.nama;
+
+            siswaElement.appendChild(option);
+
+        });
+
+
+        if (siswaKelas.length === 0) {
+
+            siswaElement.disabled = true;
+
+            siswaElement.innerHTML = `
+                <option value="">
+                    Tidak ada siswa di kelas ini
+                </option>
+            `;
+
+        }
+
+    }
+
+
+    kelasElement.addEventListener(
+        "change",
+        function() {
+
+            loadSiswaByKelas();
+
+        }
+    );
 
 
     function updateAlasanField() {
@@ -252,20 +435,25 @@
         const status =
             statusElement.value;
 
-        const membutuhkanAlasan =
+
+        const perluAlasan =
             status === "Izin" ||
             status === "Sakit";
 
 
-        if (membutuhkanAlasan) {
+        if (perluAlasan) {
 
-            alasanGroup.classList.remove("hidden");
+            alasanGroup.classList.remove(
+                "hidden"
+            );
 
             alasanElement.required = true;
 
         } else {
 
-            alasanGroup.classList.add("hidden");
+            alasanGroup.classList.add(
+                "hidden"
+            );
 
             alasanElement.required = false;
 
@@ -282,10 +470,7 @@
     );
 
 
-
     updateAlasanField();
-
-
 
 
     document
@@ -297,11 +482,16 @@
                 event.preventDefault();
 
 
+                const kelas =
+                    kelasElement.value;
+
                 const siswaId =
-                    document.getElementById("siswa").value;
+                    siswaElement.value;
 
                 const tanggal =
-                    document.getElementById("tanggal").value;
+                    document.getElementById(
+                        "tanggal"
+                    ).value;
 
                 const status =
                     statusElement.value;
@@ -310,11 +500,21 @@
                     alasanElement.value.trim();
 
 
+                if (!kelas) {
+
+                    alert(
+                        "Silakan pilih kelas terlebih dahulu."
+                    );
+
+                    return;
+
+                }
+
 
                 if (!siswaId) {
 
                     alert(
-                        "Silakan tambahkan siswa terlebih dahulu."
+                        "Silakan pilih siswa."
                     );
 
                     return;
@@ -323,9 +523,11 @@
 
 
                 if (
-                    (status === "Izin" ||
-                    status === "Sakit") &&
-                    alasan === ""
+                    (
+                        status === "Izin" ||
+                        status === "Sakit"
+                    ) &&
+                    !alasan
                 ) {
 
                     alert(
@@ -339,23 +541,25 @@
                 }
 
 
-
                 const absensi =
                     JSON.parse(
-                        localStorage.getItem("absensi") || "[]"
+                        localStorage.getItem(
+                            "absensi"
+                        ) || "[]"
                     );
 
 
-
                 const index =
-                    absensi.findIndex(function(item) {
+                    absensi.findIndex(
+                        function(item) {
 
-                        return (
-                            item.siswaId === siswaId &&
-                            item.tanggal === tanggal
-                        );
+                            return (
+                                item.siswaId === siswaId &&
+                                item.tanggal === tanggal
+                            );
 
-                    });
+                        }
+                    );
 
 
                 const dataAbsensi = {
@@ -397,13 +601,29 @@
                 );
 
 
+
                 alert(
                     "Absensi berhasil disimpan."
                 );
 
 
-
                 this.reset();
+
+
+                siswaElement.innerHTML = `
+                    <option value="">
+                        Pilih kelas terlebih dahulu
+                    </option>
+                `;
+
+                siswaElement.disabled = true;
+
+
+                alasanGroup.classList.add(
+                    "hidden"
+                );
+
+                alasanElement.required = false;
 
 
                 document.getElementById(
@@ -411,11 +631,8 @@
                 ).value = today();
 
 
-                updateAlasanField();
+                loadKelas();
 
-
-
-                loadSiswaOptions();
 
                 renderAbsensi();
 
@@ -424,9 +641,13 @@
 
 
 
+    loadKelas();
+
     renderAbsensi();
 
+
 </script>
+
 
 </body>
 
