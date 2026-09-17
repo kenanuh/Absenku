@@ -4,6 +4,6 @@
 <body>
 <script src="script.js"></script><script>requireLogin();</script><nav class="navbar"></nav>
 <main class="container"><section class="header"><h1>Tambah Siswa</h1></section>
-<div class="panel"><form id="siswaForm"><div class="form-grid"><div><label>NIS</label><input id="nis" required></div><div><label>Nama</label><input id="nama" required></div><div><label>Kelas</label><input id="kelas" required placeholder="Contoh: 10 IPA 1"></div></div><button type="submit">Simpan</button> <a class="btn secondary" href="tampil_siswa.html">Batal</a></form></div></main>
+<div class="panel"><form id="siswaForm"><div class="form-grid"><div><label>NIS</label><input id="nis" required></div><div><label>Nama</label><input id="nama" required></div><div><label>Kelas</label><input id="kelas" required placeholder="Contoh: 10 RPL 2"></div></div><button type="submit">Simpan</button> <a class="btn secondary" href="tampil_siswa.html">Batal</a></form></div></main>
 <script>renderNavbar(); document.getElementById("siswaForm").addEventListener("submit",function(e){e.preventDefault();let s=JSON.parse(localStorage.getItem("siswa")||"[]");s.push({id:Date.now().toString(),nis:nis.value.trim(),nama:nama.value.trim(),kelas:kelas.value.trim()});localStorage.setItem("siswa",JSON.stringify(s));location.href="tampil_siswa.html";});</script>
 </body></html>
