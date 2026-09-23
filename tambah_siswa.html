@@ -8,119 +8,251 @@
 
 <style>
 .add-page {
-    min-height: calc(100vh - 60px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 40px 20px;
+    min-height: calc(100vh - 65px);
+    padding: 55px 20px;
+    background:
+        radial-gradient(circle at 10% 10%, rgba(0,123,255,0.12), transparent 30%),
+        radial-gradient(circle at 90% 90%, rgba(0,86,179,0.10), transparent 30%);
 }
 
-.add-card {
-    width: 100%;
-    max-width: 600px;
+.add-wrapper {
+    max-width: 1000px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
     background: white;
-    border-radius: 18px;
-    padding: 35px 40px;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 20px 55px rgba(0,0,0,0.12);
 }
 
-.add-header {
-    text-align: center;
+.add-info {
+    background: linear-gradient(145deg, #007bff, #0056b3);
+    color: white;
+    padding: 50px 42px;
+    position: relative;
+    overflow: hidden;
+}
+
+.add-info::before {
+    content: "";
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+    top: -80px;
+    right: -70px;
+}
+
+.add-info::after {
+    content: "";
+    position: absolute;
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+    bottom: -70px;
+    left: -60px;
+}
+
+.info-icon {
+    width: 65px;
+    height: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.18);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 18px;
+    font-size: 30px;
     margin-bottom: 30px;
 }
 
-.add-header h1 {
-    margin: 0 0 8px;
-    font-size: 32px;
-    color: #111;
+.add-info h1 {
+    font-size: 38px;
+    line-height: 1.15;
+    margin: 0 0 18px;
+    position: relative;
+    z-index: 2;
 }
 
-.add-header p {
+.add-info p {
+    color: rgba(255,255,255,0.85);
+    line-height: 1.7;
+    font-size: 15px;
+    position: relative;
+    z-index: 2;
+}
+
+.info-list {
+    margin-top: 35px;
+    padding: 0;
+    list-style: none;
+    position: relative;
+    z-index: 2;
+}
+
+.info-list li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 17px;
+    font-size: 14px;
+}
+
+.info-check {
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.18);
+    border-radius: 50%;
+    font-size: 13px;
+}
+
+.add-form {
+    padding: 50px 45px;
+}
+
+.form-title {
+    margin-bottom: 30px;
+}
+
+.form-title h2 {
+    margin: 0 0 7px;
+    font-size: 26px;
+    color: #151515;
+}
+
+.form-title p {
     margin: 0;
-    color: #777;
-    font-size: 15px;
+    color: #888;
+    font-size: 14px;
 }
 
-.form-group {
-    margin-bottom: 20px;
+.input-group {
+    margin-bottom: 23px;
 }
 
-.form-group label {
+.input-label {
     display: block;
-    margin-bottom: 8px;
-    font-size: 15px;
+    margin-bottom: 9px;
+    font-size: 14px;
     font-weight: bold;
     color: #222;
 }
 
-.form-group input {
+.input-box {
+    position: relative;
+}
+
+.input-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 17px;
+    color: #8b96a3;
+    pointer-events: none;
+}
+
+.input-box input {
     width: 100%;
-    padding: 13px 15px;
-    border: 1px solid #d7dce2;
-    border-radius: 9px;
+    height: 50px;
+    padding: 0 15px 0 45px;
+    border: 1px solid #dce1e7;
+    border-radius: 11px;
+    background: #f9fafc;
+    color: #222;
     font-size: 15px;
-    background: #fff;
     transition: 0.2s;
 }
 
-.form-group input:focus {
+.input-box input::placeholder {
+    color: #a5adb7;
+}
+
+.input-box input:focus {
     outline: none;
+    background: white;
     border-color: #007bff;
-    box-shadow: 0 0 0 3px rgba(0,123,255,0.12);
+    box-shadow: 0 0 0 4px rgba(0,123,255,0.10);
 }
 
 .form-actions {
     display: flex;
     gap: 12px;
-    margin-top: 28px;
+    margin-top: 32px;
 }
 
-.btn-save,
-.btn-cancel {
-    flex: 1;
-    padding: 13px;
-    border-radius: 9px;
-    text-align: center;
+.save-btn,
+.cancel-btn {
+    height: 50px;
+    border-radius: 11px;
+    border: none;
     font-size: 15px;
     font-weight: bold;
     cursor: pointer;
     text-decoration: none;
-    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
 }
 
-.btn-save {
-    background: #007bff;
+.save-btn {
+    flex: 1;
     color: white;
+    background: linear-gradient(135deg, #007bff, #0062d6);
+    box-shadow: 0 7px 18px rgba(0,123,255,0.25);
 }
 
-.btn-save:hover {
-    background: #0056b3;
+.save-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 23px rgba(0,123,255,0.32);
 }
 
-.btn-cancel {
-    background: #e9ecef;
-    color: #333;
+.cancel-btn {
+    width: 110px;
+    color: #555;
+    background: #eef1f5;
 }
 
-.btn-cancel:hover {
-    background: #dfe3e7;
+.cancel-btn:hover {
+    background: #e2e6eb;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 800px) {
     .add-page {
         padding: 25px 15px;
     }
 
-    .add-card {
-        padding: 28px 22px;
+    .add-wrapper {
+        grid-template-columns: 1fr;
     }
 
-    .add-header h1 {
-        font-size: 27px;
+    .add-info {
+        padding: 35px 28px;
     }
 
+    .add-info h1 {
+        font-size: 30px;
+    }
+
+    .add-form {
+        padding: 35px 25px;
+    }
+}
+
+@media (max-width: 450px) {
     .form-actions {
         flex-direction: column;
+    }
+
+    .cancel-btn {
+        width: 100%;
     }
 }
 </style>
@@ -137,59 +269,128 @@ requireLogin();
 
 <main class="add-page">
 
-    <div class="add-card">
+    <div class="add-wrapper">
 
-        <div class="add-header">
-            <h1>Tambah Siswa</h1>
-            <p>Tambahkan data siswa baru ke dalam Absenku.</p>
-        </div>
+        <section class="add-info">
 
-        <form id="siswaForm">
-
-            <div class="form-group">
-                <label for="nis">NIS</label>
-                <input
-                    type="text"
-                    id="nis"
-                    placeholder="Masukkan NIS siswa"
-                    required>
+            <div class="info-icon">
+                👨‍🎓
             </div>
 
-            <div class="form-group">
-                <label for="nama">Nama Siswa</label>
-                <input
-                    type="text"
-                    id="nama"
-                    placeholder="Masukkan nama lengkap siswa"
-                    required>
+            <h1>Tambah Data Siswa</h1>
+
+            <p>
+                Tambahkan data siswa baru untuk digunakan
+                dalam sistem absensi Absenku.
+            </p>
+
+            <ul class="info-list">
+                <li>
+                    <span class="info-check">✓</span>
+                    Data siswa tersimpan otomatis
+                </li>
+
+                <li>
+                    <span class="info-check">✓</span>
+                    Bisa digunakan untuk absensi
+                </li>
+
+                <li>
+                    <span class="info-check">✓</span>
+                    Kelas siswa tercatat dengan rapi
+                </li>
+            </ul>
+
+        </section>
+
+        <section class="add-form">
+
+            <div class="form-title">
+                <h2>Informasi Siswa</h2>
+                <p>Isi data siswa dengan lengkap.</p>
             </div>
 
-            <div class="form-group">
-                <label for="kelas">Kelas</label>
-                <input
-                    type="text"
-                    id="kelas"
-                    placeholder="Contoh: XI RPL-2"
-                    required>
-            </div>
+            <form id="siswaForm">
 
-            <div class="form-actions">
+                <div class="input-group">
 
-                <button
-                    type="submit"
-                    class="btn-save">
-                    Simpan Siswa
-                </button>
+                    <label class="input-label" for="nis">
+                        Nomor Induk Siswa
+                    </label>
 
-                <a
-                    href="tampil_siswa.html"
-                    class="btn-cancel">
-                    Batal
-                </a>
+                    <div class="input-box">
 
-            </div>
+                        <span class="input-icon">🪪</span>
 
-        </form>
+                        <input
+                            type="text"
+                            id="nis"
+                            placeholder="Masukkan NIS siswa"
+                            required>
+
+                    </div>
+
+                </div>
+
+                <div class="input-group">
+
+                    <label class="input-label" for="nama">
+                        Nama Lengkap
+                    </label>
+
+                    <div class="input-box">
+
+                        <span class="input-icon">👤</span>
+
+                        <input
+                            type="text"
+                            id="nama"
+                            placeholder="Masukkan nama lengkap siswa"
+                            required>
+
+                    </div>
+
+                </div>
+
+                <div class="input-group">
+
+                    <label class="input-label" for="kelas">
+                        Kelas
+                    </label>
+
+                    <div class="input-box">
+
+                        <span class="input-icon">🏫</span>
+
+                        <input
+                            type="text"
+                            id="kelas"
+                            placeholder="Contoh: XI RPL-2"
+                            required>
+
+                    </div>
+
+                </div>
+
+                <div class="form-actions">
+
+                    <button
+                        type="submit"
+                        class="save-btn">
+                        Simpan Data Siswa
+                    </button>
+
+                    <a
+                        href="tampil_siswa.html"
+                        class="cancel-btn">
+                        Batal
+                    </a>
+
+                </div>
+
+            </form>
+
+        </section>
 
     </div>
 
