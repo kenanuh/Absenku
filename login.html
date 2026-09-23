@@ -12,123 +12,44 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 30px 20px;
+    padding: 25px;
     background:
-        radial-gradient(circle at 10% 10%, rgba(0,123,255,0.14), transparent 30%),
-        radial-gradient(circle at 90% 90%, rgba(0,86,179,0.12), transparent 30%),
+        radial-gradient(circle at top left, rgba(0,123,255,0.12), transparent 35%),
         #f4f7fb;
 }
 
-.login-wrapper {
+.login-card {
     width: 100%;
-    max-width: 950px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    max-width: 430px;
     background: white;
-    border-radius: 24px;
-    overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+    padding: 42px;
+    border-radius: 20px;
+    box-shadow: 0 15px 45px rgba(0,0,0,0.10);
 }
 
-.login-info {
-    position: relative;
-    overflow: hidden;
-    padding: 55px 45px;
-    color: white;
-    background: linear-gradient(145deg, #007bff, #0056b3);
-}
-
-.login-info::before {
-    content: "";
-    position: absolute;
-    width: 280px;
-    height: 280px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.08);
-    top: -120px;
-    right: -100px;
-}
-
-.login-info::after {
-    content: "";
-    position: absolute;
-    width: 190px;
-    height: 190px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.06);
-    bottom: -90px;
-    left: -70px;
-}
-
-.logo-box {
+.login-logo {
     width: 65px;
     height: 65px;
+    margin: 0 auto 20px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255,255,255,0.18);
-    border: 1px solid rgba(255,255,255,0.25);
     border-radius: 18px;
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: white;
     font-size: 30px;
-    margin-bottom: 30px;
-    position: relative;
-    z-index: 2;
-}
-
-.login-info h1 {
-    margin: 0 0 15px;
-    font-size: 42px;
-    line-height: 1.1;
-    position: relative;
-    z-index: 2;
-}
-
-.login-info p {
-    margin: 0;
-    max-width: 350px;
-    color: rgba(255,255,255,0.86);
-    line-height: 1.7;
-    font-size: 15px;
-    position: relative;
-    z-index: 2;
-}
-
-.login-feature {
-    margin-top: 40px;
-    position: relative;
-    z-index: 2;
-}
-
-.feature-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 18px;
-    font-size: 14px;
-}
-
-.feature-icon {
-    width: 27px;
-    height: 27px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255,255,255,0.18);
-    border-radius: 50%;
-}
-
-.login-form {
-    padding: 55px 50px;
+    box-shadow: 0 8px 20px rgba(0,123,255,0.25);
 }
 
 .login-header {
+    text-align: center;
     margin-bottom: 32px;
 }
 
-.login-header h2 {
+.login-header h1 {
     margin: 0 0 8px;
+    font-size: 32px;
     color: #151515;
-    font-size: 29px;
 }
 
 .login-header p {
@@ -137,52 +58,52 @@
     font-size: 14px;
 }
 
-.form-group {
-    margin-bottom: 22px;
+.login-group {
+    margin-bottom: 21px;
 }
 
-.form-group label {
+.login-group label {
     display: block;
-    margin-bottom: 9px;
+    margin-bottom: 8px;
     font-size: 14px;
     font-weight: bold;
     color: #222;
 }
 
-.input-box {
+.login-input {
     position: relative;
 }
 
-.input-icon {
+.login-input span {
     position: absolute;
     left: 15px;
     top: 50%;
     transform: translateY(-50%);
     font-size: 17px;
-    color: #8b96a3;
+    color: #8993a0;
 }
 
-.input-box input {
+.login-input input {
     width: 100%;
     height: 52px;
     padding: 0 15px 0 45px;
     border: 1px solid #dce1e7;
-    border-radius: 11px;
+    border-radius: 10px;
     background: #f9fafc;
     font-size: 15px;
     color: #222;
     transition: 0.2s;
 }
 
-.input-box input:focus {
+.login-input input::placeholder {
+    color: #a4acb7;
+}
+
+.login-input input:focus {
     outline: none;
     background: white;
     border-color: #007bff;
     box-shadow: 0 0 0 4px rgba(0,123,255,0.10);
-}
-
-.input-box input::placeholder {
-    color: #a5adb7;
 }
 
 .login-button {
@@ -190,70 +111,43 @@
     height: 52px;
     margin-top: 8px;
     border: none;
-    border-radius: 11px;
+    border-radius: 10px;
     background: linear-gradient(135deg, #007bff, #0062d6);
     color: white;
     font-size: 15px;
     font-weight: bold;
     cursor: pointer;
-    box-shadow: 0 7px 18px rgba(0,123,255,0.25);
+    box-shadow: 0 7px 18px rgba(0,123,255,0.23);
     transition: 0.2s;
 }
 
 .login-button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 24px rgba(0,123,255,0.32);
+    box-shadow: 0 10px 24px rgba(0,123,255,0.30);
 }
 
 .demo-box {
-    margin-top: 22px;
-    padding: 13px 15px;
-    border-radius: 10px;
+    margin-top: 20px;
+    padding: 12px;
+    text-align: center;
     background: #f1f6ff;
     border: 1px solid #dceaff;
-    color: #555;
+    border-radius: 9px;
+    color: #777;
     font-size: 13px;
-    text-align: center;
 }
 
 .demo-box strong {
     color: #007bff;
 }
 
-@media (max-width: 750px) {
-    .login-wrapper {
-        grid-template-columns: 1fr;
-        max-width: 500px;
-    }
-
-    .login-info {
-        padding: 35px 30px;
-    }
-
-    .login-info h1 {
-        font-size: 34px;
-    }
-
-    .login-feature {
-        margin-top: 25px;
-    }
-
-    .login-form {
-        padding: 35px 30px;
-    }
-}
-
-@media (max-width: 450px) {
+@media (max-width: 500px) {
     .login-page {
         padding: 15px;
     }
 
-    .login-info {
-        padding: 30px 25px;
-    }
-
-    .login-form {
-        padding: 30px 22px;
+    .login-card {
+        padding: 32px 24px;
     }
 }
 </style>
@@ -263,108 +157,73 @@
 
 <main class="login-page">
 
-    <div class="login-wrapper">
+    <div class="login-card">
 
-        <section class="login-info">
+        <div class="login-logo">
+            📋
+        </div>
 
-            <div class="logo-box">
-                📋
-            </div>
-
+        <div class="login-header">
             <h1>Absenku</h1>
+            <p>Silakan login untuk melanjutkan</p>
+        </div>
 
-            <p>
-                Sistem absensi siswa yang sederhana,
-                rapi, dan mudah digunakan untuk
-                mengelola kehadiran siswa.
-            </p>
+        <form id="loginForm">
 
-            <div class="login-feature">
+            <div class="login-group">
 
-                <div class="feature-item">
-                    <span class="feature-icon">✓</span>
-                    Kelola data siswa
-                </div>
+                <label for="username">
+                    Username
+                </label>
 
-                <div class="feature-item">
-                    <span class="feature-icon">✓</span>
-                    Catat absensi dengan mudah
-                </div>
+                <div class="login-input">
 
-                <div class="feature-item">
-                    <span class="feature-icon">✓</span>
-                    Pantau riwayat kehadiran
+                    <span>👤</span>
+
+                    <input
+                        type="text"
+                        id="username"
+                        placeholder="Masukkan username"
+                        autocomplete="username"
+                        required>
+
                 </div>
 
             </div>
 
-        </section>
+            <div class="login-group">
 
-        <section class="login-form">
+                <label for="password">
+                    Password
+                </label>
 
-            <div class="login-header">
-                <h2>Selamat Datang 👋</h2>
-                <p>Silakan login untuk melanjutkan ke Absenku.</p>
-            </div>
+                <div class="login-input">
 
-            <form id="loginForm">
+                    <span>🔒</span>
 
-                <div class="form-group">
-
-                    <label for="username">
-                        Username
-                    </label>
-
-                    <div class="input-box">
-
-                        <span class="input-icon">👤</span>
-
-                        <input
-                            type="text"
-                            id="username"
-                            placeholder="Masukkan username"
-                            autocomplete="username"
-                            required>
-
-                    </div>
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Masukkan password"
+                        autocomplete="current-password"
+                        required>
 
                 </div>
 
-                <div class="form-group">
-
-                    <label for="password">
-                        Password
-                    </label>
-
-                    <div class="input-box">
-
-                        <span class="input-icon">🔒</span>
-
-                        <input
-                            type="password"
-                            id="password"
-                            placeholder="Masukkan password"
-                            autocomplete="current-password"
-                            required>
-
-                    </div>
-
-                </div>
-
-                <button
-                    type="submit"
-                    class="login-button">
-                    Login
-                </button>
-
-            </form>
-
-            <div class="demo-box">
-                Demo: <strong>admin</strong> /
-                <strong>admin123</strong>
             </div>
 
-        </section>
+            <button
+                type="submit"
+                class="login-button">
+                Login
+            </button>
+
+        </form>
+
+        <div class="demo-box">
+            Demo: <strong>admin</strong> /
+            <strong>admin123</strong>
+        </div>
 
     </div>
 
