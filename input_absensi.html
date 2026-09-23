@@ -41,11 +41,56 @@
             border-color: #007bff;
         }
 
+        <div
+    id="fileGroup"
+    class="file-group hidden"
+>
+
+    <label for="surat">
+        Foto Surat Izin/Sakit
+    </label>
+
+    <input
+        type="file"
+        id="surat"
+        accept="image/*"
+    >
+
+    <small class="file-info">
+        Upload foto surat izin atau surat sakit.
+    </small>
+
+</div>
+
         .reason-info {
             display: block;
             margin-top: 6px;
             color: #777;
             font-size: 13px;
+        }
+
+        .file-group {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        }
+
+        .file-group.hidden {
+        display: none;
+        }
+
+        .file-group input[type="file"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        background: white;
+        }
+
+        .file-info {
+        display: block;
+        margin-top: 6px;
+        color: #777;
+        font-size: 13px;
         }
 
     </style>
