@@ -141,7 +141,9 @@ function updateDashboard() {
     const jumlahTidakHadir =
         absensiBulanIni.filter(function(item) {
 
-            return item.status !== "Hadir";
+            return item.status === "Izin" ||
+                   item.status === "Sakit" ||
+                   item.status === "Alpa";
 
         }).length;
 
@@ -181,6 +183,48 @@ function updateDashboard() {
 
         tidakHadirBulanIni.textContent =
             jumlahTidakHadir;
+
+    }
+
+
+    const hadirHariIni =
+        document.getElementById(
+            "hadirHariIni"
+        );
+
+    if (hadirHariIni) {
+
+        const jumlahHadirHariIni =
+            absensi.filter(function(item) {
+
+                return item.tanggal === today() &&
+                       item.status === "Hadir";
+
+            }).length;
+
+        hadirHariIni.textContent =
+            jumlahHadirHariIni;
+
+    }
+
+
+    const tidakHadir =
+        document.getElementById(
+            "tidakHadir"
+        );
+
+    if (tidakHadir) {
+
+        const jumlahTidakHadirHariIni =
+            absensi.filter(function(item) {
+
+                return item.tanggal === today() &&
+                       item.status !== "Hadir";
+
+            }).length;
+
+        tidakHadir.textContent =
+            jumlahTidakHadirHariIni;
 
     }
 
@@ -480,6 +524,7 @@ function renderAbsensi() {
         .join("");
 
 }
+
 
 function hapusAbsensi(index) {
 
