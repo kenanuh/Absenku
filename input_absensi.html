@@ -2,16 +2,11 @@
 <html lang="id">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Input Absensi - Absenku</title>
 
     <style>
-
         * {
             box-sizing: border-box;
         }
@@ -81,7 +76,6 @@
             font-weight: bold;
         }
 
-
         .container {
             width: 92%;
             max-width: 1200px;
@@ -114,7 +108,6 @@
             margin-top: 0;
             margin-bottom: 25px;
         }
-
 
         .form-row {
             display: grid;
@@ -160,7 +153,7 @@
 
         .optional-section {
             display: none;
-            margin-top: 5px;
+            margin-top: 10px;
         }
 
         .optional-section.show {
@@ -191,7 +184,6 @@
             object-fit: contain;
         }
 
-
         .btn-submit {
             background: #007bff;
             color: white;
@@ -206,7 +198,6 @@
         .btn-submit:hover {
             background: #0056b3;
         }
-
 
         .table-wrapper {
             overflow-x: auto;
@@ -241,9 +232,7 @@
             text-align: center;
         }
 
-
         @media (max-width: 800px) {
-
             .navbar {
                 flex-direction: column;
                 padding: 10px;
@@ -278,198 +267,114 @@
             .card {
                 padding: 22px;
             }
-
         }
-
     </style>
-
 </head>
-
 
 <body>
 
 <nav class="navbar">
-
-    <a href="index.html" class="navbar-brand">
-        Absenku
-    </a>
+    <a href="index.html" class="navbar-brand">Absenku</a>
 
     <ul class="navbar-menu">
-
         <li>
-            <a href="index.html">
-                Dashboard
-            </a>
+            <a href="index.html">Dashboard</a>
         </li>
 
         <li>
-            <a href="input_absensi.html" class="active">
-                Input Absensi
-            </a>
+            <a href="input_absensi.html" class="active">Input Absensi</a>
         </li>
 
         <li>
-            <a href="tampil_siswa.html">
-                Data Siswa
-            </a>
+            <a href="tampil_siswa.html">Data Siswa</a>
         </li>
-
     </ul>
 
     <div class="navbar-user">
-
         <span>
             Halo,
-            <strong id="namaAdmin">
-                Admin
-            </strong>
+            <strong id="namaAdmin">Admin</strong>
         </span>
 
         <a
             href="logout.html"
             class="btn-logout"
-            onclick="return confirm('Apakah Anda yakin ingin keluar?')"
-        >
+            onclick="return confirm('Apakah Anda yakin ingin keluar?')">
             Logout
         </a>
-
     </div>
-
 </nav>
-
 
 <div class="container">
 
     <div class="header">
-
-        <h1>
-            Input Absensi
-        </h1>
-
-        <p>
-            Catat kehadiran siswa.
-        </p>
-
+        <h1>Input Absensi</h1>
+        <p>Catat kehadiran siswa.</p>
     </div>
-
 
     <div class="card">
 
-        <h2>
-            Input Absensi Siswa
-        </h2>
-
+        <h2>Input Absensi Siswa</h2>
 
         <form id="absensiForm">
 
-
             <div class="form-row">
 
-
                 <div class="form-group">
-
-                    <label for="kelas">
-                        Kelas
-                    </label>
+                    <label for="kelas">Kelas</label>
 
                     <select id="kelas" required>
-
-                        <option value="">
-                            Pilih kelas
-                        </option>
-
+                        <option value="">Pilih kelas</option>
                     </select>
-
                 </div>
 
-
                 <div class="form-group">
-
-                    <label for="siswa">
-                        Siswa
-                    </label>
+                    <label for="siswa">Siswa</label>
 
                     <select id="siswa" required disabled>
-
-                        <option value="">
-                            Pilih kelas terlebih dahulu
-                        </option>
-
+                        <option value="">Pilih kelas terlebih dahulu</option>
                     </select>
-
                 </div>
 
                 <div class="form-group">
-
-                    <label for="tanggal">
-                        Tanggal
-                    </label>
+                    <label for="tanggal">Tanggal</label>
 
                     <input
                         type="date"
                         id="tanggal"
-                        required
-                    >
-
+                        required>
                 </div>
 
             </div>
 
-
             <div class="form-group">
 
-                <label for="status">
-                    Status
-                </label>
+                <label for="status">Status</label>
 
                 <select id="status" required>
-
-                    <option value="Hadir">
-                        Hadir
-                    </option>
-
-                    <option value="Izin">
-                        Izin
-                    </option>
-
-                    <option value="Sakit">
-                        Sakit
-                    </option>
-
-                    <option value="Alpa">
-                        Alpa
-                    </option>
-
+                    <option value="Hadir">Hadir</option>
+                    <option value="Izin">Izin</option>
+                    <option value="Sakit">Sakit</option>
+                    <option value="Alpa">Alpa</option>
                 </select>
 
             </div>
 
-
-            <div
-                id="alasanSection"
-                class="optional-section"
-            >
+            <div id="alasanSection" class="optional-section">
 
                 <div class="form-group">
 
-                    <label for="alasan">
-                        Alasan
-                    </label>
+                    <label for="alasan">Alasan</label>
 
                     <textarea
                         id="alasan"
-                        placeholder="Masukkan alasan izin atau sakit..."
-                    ></textarea>
+                        placeholder="Masukkan alasan izin atau sakit..."></textarea>
 
                 </div>
 
             </div>
 
-
-            <div
-                id="suratSection"
-                class="optional-section"
-            >
+            <div id="suratSection" class="optional-section">
 
                 <div class="form-group">
 
@@ -480,28 +385,20 @@
                     <input
                         type="file"
                         id="surat"
-                        accept="image/*"
-                    >
+                        accept="image/*">
 
                     <small class="file-info">
-                        Upload foto surat izin atau surat sakit.
-                        Maksimal ukuran 2 MB.
+                        Upload foto surat izin atau surat sakit. Maksimal ukuran 2 MB.
                     </small>
 
-                    <div
-                        id="preview"
-                        class="preview"
-                    >
+                    <div id="preview" class="preview">
 
-                        <p>
-                            Preview foto:
-                        </p>
+                        <p>Preview foto:</p>
 
                         <img
                             id="previewImage"
                             src=""
-                            alt="Preview surat"
-                        >
+                            alt="Preview surat">
 
                     </div>
 
@@ -509,62 +406,36 @@
 
             </div>
 
-
-            <button
-                type="submit"
-                class="btn-submit"
-            >
+            <button type="submit" class="btn-submit">
                 Simpan Absensi
             </button>
-
 
         </form>
 
     </div>
 
-
     <div class="card">
 
-        <h2>
-            Riwayat Absensi
-        </h2>
-
+        <h2>Riwayat Absensi</h2>
 
         <div class="table-wrapper">
 
             <table>
 
                 <thead>
-
                     <tr>
-
-                        <th>
-                            Tanggal
-                        </th>
-
-                        <th>
-                            Siswa
-                        </th>
-
-                        <th>
-                            Status
-                        </th>
-
+                        <th>Tanggal</th>
+                        <th>Siswa</th>
+                        <th>Status</th>
                     </tr>
-
                 </thead>
 
                 <tbody id="absensiTable">
 
                     <tr>
-
-                        <td
-                            colspan="3"
-                            class="empty"
-                        >
+                        <td colspan="3" class="empty">
                             Belum ada absensi.
                         </td>
-
                     </tr>
 
                 </tbody>
@@ -577,725 +448,506 @@
 
 </div>
 
-
 <script src="script.js"></script>
-
 
 <script>
 
-    requireLogin();
+requireLogin();
 
+const username =
+    localStorage.getItem("username") || "Admin";
 
-    const username =
-        localStorage.getItem("username") || "Admin";
+document.getElementById("namaAdmin").textContent = username;
 
-    document.getElementById(
-        "namaAdmin"
-    ).textContent = username;
+const kelasElement =
+    document.getElementById("kelas");
 
+const siswaElement =
+    document.getElementById("siswa");
 
-    const kelasElement =
-        document.getElementById("kelas");
+const tanggalElement =
+    document.getElementById("tanggal");
 
-    const siswaElement =
-        document.getElementById("siswa");
+const statusElement =
+    document.getElementById("status");
 
-    const tanggalElement =
-        document.getElementById("tanggal");
+const alasanElement =
+    document.getElementById("alasan");
 
-    const statusElement =
-        document.getElementById("status");
+const alasanSection =
+    document.getElementById("alasanSection");
 
-    const alasanElement =
-        document.getElementById("alasan");
+const suratSection =
+    document.getElementById("suratSection");
 
-    const alasanSection =
-        document.getElementById("alasanSection");
+const suratElement =
+    document.getElementById("surat");
 
-    const suratSection =
-        document.getElementById("suratSection");
+const preview =
+    document.getElementById("preview");
 
-    const suratElement =
-        document.getElementById("surat");
+const previewImage =
+    document.getElementById("previewImage");
 
-    const preview =
-        document.getElementById("preview");
+tanggalElement.value = today();
 
-    const previewImage =
-        document.getElementById("previewImage");
+function getSiswa() {
+    return JSON.parse(
+        localStorage.getItem("siswa") || "[]"
+    );
+}
 
+function loadKelas() {
 
-    tanggalElement.value =
-        today();
+    const siswa = getSiswa();
 
+    const kelasList = [
+        ...new Set(
+            siswa
+                .map(function(item) {
+                    return item.kelas;
+                })
+                .filter(function(kelas) {
+                    return kelas;
+                })
+        )
+    ].sort();
 
-    function getSiswa() {
+    kelasElement.innerHTML =
+        '<option value="">Pilih kelas</option>';
 
-        return JSON.parse(
-            localStorage.getItem("siswa") || "[]"
-        );
+    kelasList.forEach(function(kelas) {
 
-    }
-
-
-    /* =========================
-       LOAD KELAS
-       ========================= */
-
-    function loadKelas() {
-
-        const siswa =
-            getSiswa();
-
-        const kelasList =
-            [...new Set(
-                siswa
-                    .map(function(item) {
-                        return item.kelas;
-                    })
-                    .filter(function(kelas) {
-                        return kelas;
-                    })
-            )]
-            .sort();
-
-
-        kelasElement.innerHTML = `
-            <option value="">
-                Pilih kelas
-            </option>
-        `;
-
-
-        kelasList.forEach(function(kelas) {
-
-            const option =
-                document.createElement("option");
-
-            option.value =
-                kelas;
-
-            option.textContent =
-                kelas;
-
-            kelasElement.appendChild(
-                option
-            );
-
-        });
-
-    }
-
-
-    function loadSiswaByKelas() {
-
-        const kelas =
-            kelasElement.value;
-
-        const siswa =
-            getSiswa();
-
-
-        siswaElement.innerHTML = "";
-
-
-        if (!kelas) {
-
-            siswaElement.disabled = true;
-
-            const option =
-                document.createElement("option");
-
-            option.value = "";
-
-            option.textContent =
-                "Pilih kelas terlebih dahulu";
-
-            siswaElement.appendChild(
-                option
-            );
-
-            return;
-
-        }
-
-
-        const siswaKelas =
-            siswa.filter(function(item) {
-
-                return item.kelas === kelas;
-
-            });
-
-
-        siswaElement.disabled =
-            siswaKelas.length === 0;
-
-
-        if (siswaKelas.length === 0) {
-
-            const option =
-                document.createElement("option");
-
-            option.value = "";
-
-            option.textContent =
-                "Belum ada siswa di kelas ini";
-
-            siswaElement.appendChild(
-                option
-            );
-
-            return;
-
-        }
-
-
-        const defaultOption =
+        const option =
             document.createElement("option");
 
-        defaultOption.value = "";
+        option.value = kelas;
+        option.textContent = kelas;
 
-        defaultOption.textContent =
-            "Pilih siswa";
+        kelasElement.appendChild(option);
 
-        siswaElement.appendChild(
-            defaultOption
-        );
+    });
+}
 
+function loadSiswaByKelas() {
 
-        siswaKelas.forEach(function(item) {
+    const kelas =
+        kelasElement.value;
 
-            const option =
-                document.createElement("option");
+    const siswa =
+        getSiswa();
 
-            option.value =
-                item.id;
+    siswaElement.innerHTML = "";
 
-            option.textContent =
-                item.nis + " - " + item.nama;
+    if (!kelas) {
 
-            siswaElement.appendChild(
-                option
-            );
+        siswaElement.disabled = true;
 
-        });
+        const option =
+            document.createElement("option");
 
+        option.value = "";
+        option.textContent =
+            "Pilih kelas terlebih dahulu";
+
+        siswaElement.appendChild(option);
+
+        return;
     }
 
+    const siswaKelas =
+        siswa.filter(function(item) {
+            return item.kelas === kelas;
+        });
 
-    function updateStatus() {
+    if (siswaKelas.length === 0) {
 
-        const status =
-            statusElement.value;
+        siswaElement.disabled = true;
 
+        const option =
+            document.createElement("option");
 
-        const perluSurat =
-            status === "Izin" ||
-            status === "Sakit";
+        option.value = "";
+        option.textContent =
+            "Belum ada siswa di kelas ini";
 
+        siswaElement.appendChild(option);
 
-        if (perluSurat) {
+        return;
+    }
 
-            alasanSection.classList.add(
-                "show"
-            );
+    siswaElement.disabled = false;
 
-            suratSection.classList.add(
-                "show"
-            );
+    const defaultOption =
+        document.createElement("option");
 
-        } else {
+    defaultOption.value = "";
+    defaultOption.textContent =
+        "Pilih siswa";
 
-            alasanSection.classList.remove(
-                "show"
-            );
+    siswaElement.appendChild(defaultOption);
 
-            suratSection.classList.remove(
-                "show"
-            );
+    siswaKelas.forEach(function(item) {
 
-            alasanElement.value = "";
+        const option =
+            document.createElement("option");
+
+        option.value = item.id;
+
+        option.textContent =
+            item.nis + " - " + item.nama;
+
+        siswaElement.appendChild(option);
+
+    });
+}
+
+function updateStatus() {
+
+    const perluSurat =
+        statusElement.value === "Izin" ||
+        statusElement.value === "Sakit";
+
+    if (perluSurat) {
+
+        alasanSection.classList.add("show");
+        suratSection.classList.add("show");
+
+        alasanElement.required = true;
+
+    } else {
+
+        alasanSection.classList.remove("show");
+        suratSection.classList.remove("show");
+
+        alasanElement.required = false;
+        alasanElement.value = "";
+
+        suratElement.value = "";
+
+        preview.classList.remove("show");
+        previewImage.src = "";
+    }
+}
+
+suratElement.addEventListener(
+    "change",
+    function() {
+
+        const file =
+            suratElement.files[0];
+
+        if (!file) {
+            preview.classList.remove("show");
+            previewImage.src = "";
+            return;
+        }
+
+        if (!file.type.startsWith("image/")) {
+
+            alert("File harus berupa foto/gambar.");
 
             suratElement.value = "";
 
-            preview.classList.remove(
-                "show"
-            );
+            preview.classList.remove("show");
 
-            previewImage.src = "";
-
+            return;
         }
 
+        if (file.size > 2 * 1024 * 1024) {
+
+            alert("Ukuran foto maksimal 2 MB.");
+
+            suratElement.value = "";
+
+            preview.classList.remove("show");
+
+            return;
+        }
+
+        const reader =
+            new FileReader();
+
+        reader.onload =
+            function(event) {
+
+                previewImage.src =
+                    event.target.result;
+
+                preview.classList.add("show");
+            };
+
+        reader.readAsDataURL(file);
     }
+);
 
+kelasElement.addEventListener(
+    "change",
+    loadSiswaByKelas
+);
 
-    suratElement.addEventListener(
-        "change",
-        function() {
+statusElement.addEventListener(
+    "change",
+    updateStatus
+);
 
-            const file =
-                suratElement.files[0];
+function fileToBase64(file) {
 
-
-            if (!file) {
-
-                preview.classList.remove(
-                    "show"
-                );
-
-                previewImage.src = "";
-
-                return;
-
-            }
-
-
-            if (!file.type.startsWith("image/")) {
-
-                alert(
-                    "File harus berupa foto/gambar."
-                );
-
-                suratElement.value = "";
-
-                preview.classList.remove(
-                    "show"
-                );
-
-                return;
-
-            }
-
-
-            if (
-                file.size >
-                2 * 1024 * 1024
-            ) {
-
-                alert(
-                    "Ukuran foto maksimal 2 MB."
-                );
-
-                suratElement.value = "";
-
-                preview.classList.remove(
-                    "show"
-                );
-
-                return;
-
-            }
-
+    return new Promise(
+        function(resolve, reject) {
 
             const reader =
                 new FileReader();
 
-
             reader.onload =
-                function(event) {
-
-                    previewImage.src =
-                        event.target.result;
-
-                    preview.classList.add(
-                        "show"
-                    );
-
+                function() {
+                    resolve(reader.result);
                 };
 
+            reader.onerror =
+                function() {
+                    reject(
+                        new Error(
+                            "Gagal membaca foto surat."
+                        )
+                    );
+                };
 
             reader.readAsDataURL(file);
-
         }
     );
+}
 
+document
+    .getElementById("absensiForm")
+    .addEventListener(
+        "submit",
+        async function(event) {
 
-    kelasElement.addEventListener(
-        "change",
-        function() {
+            event.preventDefault();
 
-            loadSiswaByKelas();
+            const kelas =
+                kelasElement.value;
 
-        }
-    );
+            const siswaId =
+                siswaElement.value;
 
+            const tanggal =
+                tanggalElement.value;
 
-    statusElement.addEventListener(
-        "change",
-        function() {
+            const status =
+                statusElement.value;
 
-            updateStatus();
+            const alasan =
+                alasanElement.value.trim();
 
-        }
-    );
+            const file =
+                suratElement.files[0];
 
-
-    function fileToBase64(file) {
-
-        return new Promise(
-            function(resolve, reject) {
-
-                const reader =
-                    new FileReader();
-
-
-                reader.onload =
-                    function() {
-
-                        resolve(
-                            reader.result
-                        );
-
-                    };
-
-
-                reader.onerror =
-                    function() {
-
-                        reject(
-                            new Error(
-                                "Gagal membaca foto surat."
-                            )
-                        );
-
-                    };
-
-
-                reader.readAsDataURL(file);
-
+            if (!kelas) {
+                alert("Silakan pilih kelas.");
+                return;
             }
-        );
 
-    }
+            if (!siswaId) {
+                alert("Silakan pilih siswa.");
+                return;
+            }
 
+            if (!tanggal) {
+                alert("Silakan pilih tanggal.");
+                return;
+            }
 
-    document
-        .getElementById("absensiForm")
-        .addEventListener(
-            "submit",
-            async function(event) {
+            if (
+                (
+                    status === "Izin" ||
+                    status === "Sakit"
+                ) &&
+                !alasan
+            ) {
+                alert("Silakan isi alasan.");
+                return;
+            }
 
-                event.preventDefault();
+            let fotoSurat = "";
 
+            if (
+                (
+                    status === "Izin" ||
+                    status === "Sakit"
+                ) &&
+                file
+            ) {
 
-                const kelas =
-                    kelasElement.value;
-
-                const siswaId =
-                    siswaElement.value;
-
-                const tanggal =
-                    tanggalElement.value;
-
-                const status =
-                    statusElement.value;
-
-                const alasan =
-                    alasanElement.value.trim();
-
-                const file =
-                    suratElement.files[0];
-
-
-                if (!kelas) {
+                if (!file.type.startsWith("image/")) {
 
                     alert(
-                        "Silakan pilih kelas."
+                        "File surat harus berupa gambar."
                     );
 
                     return;
-
                 }
-
-
-                if (!siswaId) {
-
-                    alert(
-                        "Silakan pilih siswa."
-                    );
-
-                    return;
-
-                }
-
-
-                if (!tanggal) {
-
-                    alert(
-                        "Silakan pilih tanggal."
-                    );
-
-                    return;
-
-                }
-
 
                 if (
-                    (
-                        status === "Izin" ||
-                        status === "Sakit"
-                    ) &&
-                    !alasan
+                    file.size >
+                    2 * 1024 * 1024
                 ) {
 
                     alert(
-                        "Silakan isi alasan."
+                        "Ukuran foto maksimal 2 MB."
                     );
 
                     return;
-
                 }
-
-
-                let fotoSurat = "";
-
-
-                if (
-                    (
-                        status === "Izin" ||
-                        status === "Sakit"
-                    ) &&
-                    file
-                ) {
-
-                    if (
-                        !file.type.startsWith(
-                            "image/"
-                        )
-                    ) {
-
-                        alert(
-                            "File surat harus berupa gambar."
-                        );
-
-                        return;
-
-                    }
-
-
-                    if (
-                        file.size >
-                        2 * 1024 * 1024
-                    ) {
-
-                        alert(
-                            "Ukuran foto maksimal 2 MB."
-                        );
-
-                        return;
-
-                    }
-
-
-                    try {
-
-                        fotoSurat =
-                            await fileToBase64(
-                                file
-                            );
-
-                    } catch (error) {
-
-                        alert(
-                            "Gagal membaca foto surat."
-                        );
-
-                        return;
-
-                    }
-
-                }
-
-
-                const absensi =
-                    JSON.parse(
-                        localStorage.getItem(
-                            "absensi"
-                        ) || "[]"
-                    );
-
-
-                const dataAbsensi = {
-
-                    id:
-                        Date.now().toString(),
-
-                    siswaId:
-                        siswaId,
-
-                    kelas:
-                        kelas,
-
-                    tanggal:
-                        tanggal,
-
-                    status:
-                        status,
-
-                    alasan:
-                        (
-                            status === "Izin" ||
-                            status === "Sakit"
-                        )
-                        ? alasan
-                        : "",
-
-                    fotoSurat:
-                        (
-                            status === "Izin" ||
-                            status === "Sakit"
-                        )
-                        ? fotoSurat
-                        : ""
-
-                };
-
-
-                absensi.push(
-                    dataAbsensi
-                );
-
 
                 try {
 
-                    localStorage.setItem(
-                        "absensi",
-                        JSON.stringify(
-                            absensi
-                        )
-                    );
+                    fotoSurat =
+                        await fileToBase64(file);
 
                 } catch (error) {
 
                     alert(
-                        "Foto terlalu besar untuk disimpan di browser. Coba gunakan foto yang lebih kecil."
+                        "Gagal membaca foto surat."
                     );
 
                     return;
-
                 }
+            }
 
+            const absensi =
+                JSON.parse(
+                    localStorage.getItem("absensi") || "[]"
+                );
+
+            const dataAbsensi = {
+
+                id:
+                    Date.now().toString(),
+
+                siswaId:
+                    siswaId,
+
+                kelas:
+                    kelas,
+
+                tanggal:
+                    tanggal,
+
+                status:
+                    status,
+
+                alasan:
+                    (
+                        status === "Izin" ||
+                        status === "Sakit"
+                    )
+                        ? alasan
+                        : "",
+
+                fotoSurat:
+                    (
+                        status === "Izin" ||
+                        status === "Sakit"
+                    )
+                        ? fotoSurat
+                        : ""
+            };
+
+            absensi.push(dataAbsensi);
+
+            try {
+
+                localStorage.setItem(
+                    "absensi",
+                    JSON.stringify(absensi)
+                );
+
+            } catch (error) {
 
                 alert(
-                    "Absensi berhasil disimpan."
+                    "Foto terlalu besar untuk disimpan. Gunakan foto yang lebih kecil."
                 );
 
-
-                siswaElement.value =
-                    "";
-
-                kelasElement.value =
-                    "";
-
-                siswaElement.disabled =
-                    true;
-
-                tanggalElement.value =
-                    today();
-
-                statusElement.value =
-                    "Hadir";
-
-                alasanElement.value =
-                    "";
-
-                suratElement.value =
-                    "";
-
-                preview.classList.remove(
-                    "show"
-                );
-
-                previewImage.src =
-                    "";
-
-                updateStatus();
-
-                loadSiswaByKelas();
-
-                renderRiwayat();
-
+                return;
             }
+
+            alert("Absensi berhasil disimpan.");
+
+            document
+                .getElementById("absensiForm")
+                .reset();
+
+            tanggalElement.value = today();
+
+            siswaElement.innerHTML =
+                '<option value="">Pilih kelas terlebih dahulu</option>';
+
+            siswaElement.disabled = true;
+
+            preview.classList.remove("show");
+
+            previewImage.src = "";
+
+            updateStatus();
+
+            loadKelas();
+
+            renderRiwayat();
+        }
+    );
+
+function renderRiwayat() {
+
+    const table =
+        document.getElementById("absensiTable");
+
+    const siswa =
+        getSiswa();
+
+    const absensi =
+        JSON.parse(
+            localStorage.getItem("absensi") || "[]"
         );
 
+    if (absensi.length === 0) {
 
-    function renderRiwayat() {
+        table.innerHTML = `
+            <tr>
+                <td colspan="3" class="empty">
+                    Belum ada absensi.
+                </td>
+            </tr>
+        `;
 
-        const table =
-            document.getElementById(
-                "absensiTable"
-            );
+        return;
+    }
 
-
-        const siswa =
-            getSiswa();
-
-
-        const absensi =
-            JSON.parse(
-                localStorage.getItem(
-                    "absensi"
-                ) || "[]"
-            );
-
-
-        if (absensi.length === 0) {
-
-            table.innerHTML = `
-
-                <tr>
-
-                    <td
-                        colspan="3"
-                        class="empty"
-                    >
-                        Belum ada absensi.
-                    </td>
-
-                </tr>
-
-            `;
-
-            return;
-
-        }
-
-
-        table.innerHTML =
-
-            [...absensi]
+    table.innerHTML =
+        [...absensi]
             .reverse()
             .map(function(item) {
 
-
                 const siswaData =
-                    siswa.find(
-                        function(s) {
-
-                            return (
-                                s.id ===
-                                item.siswaId
-                            );
-
-                        }
-                    );
-
+                    siswa.find(function(s) {
+                        return s.id === item.siswaId;
+                    });
 
                 const nama =
                     siswaData
                         ? siswaData.nama
                         : "Siswa dihapus";
 
-
                 const link =
                     siswaData
-                        ? `detail_absensi.html?siswaId=${encodeURIComponent(item.siswaId)}&tanggal=${encodeURIComponent(item.tanggal)}`
+                        ? "detail_absensi.html?siswaId=" +
+                          encodeURIComponent(item.siswaId) +
+                          "&tanggal=" +
+                          encodeURIComponent(item.tanggal)
                         : "#";
 
-
                 return `
-
                     <tr
                         data-link="${link}"
                         onclick="
@@ -1304,45 +956,30 @@
                             }
                         "
                     >
-
                         <td>
-                            ${escapeHtml(
-                                item.tanggal
-                            )}
+                            ${escapeHtml(item.tanggal)}
                         </td>
 
                         <td>
-                            ${escapeHtml(
-                                nama
-                            )}
+                            ${escapeHtml(nama)}
                         </td>
 
                         <td>
-                            ${escapeHtml(
-                                item.status
-                            )}
+                            ${escapeHtml(item.status)}
                         </td>
-
                     </tr>
-
                 `;
 
             })
             .join("");
+}
 
-    }
-
-
-    loadKelas();
-
-    loadSiswaByKelas();
-
-    updateStatus();
-
-    renderRiwayat();
+loadKelas();
+loadSiswaByKelas();
+updateStatus();
+renderRiwayat();
 
 </script>
 
 </body>
-
 </html>
