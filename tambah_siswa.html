@@ -1,9 +1,264 @@
 <!DOCTYPE html>
 <html lang="id">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Tambah Siswa - Absenku</title><link rel="stylesheet" href="style.css"></head>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tambah Siswa - Absenku</title>
+<link rel="stylesheet" href="style.css">
+
+<style>
+.add-page {
+    min-height: calc(100vh - 60px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+.add-card {
+    width: 100%;
+    max-width: 600px;
+    background: white;
+    border-radius: 18px;
+    padding: 35px 40px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+}
+
+.add-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.add-header h1 {
+    margin: 0 0 8px;
+    font-size: 32px;
+    color: #111;
+}
+
+.add-header p {
+    margin: 0;
+    color: #777;
+    font-size: 15px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 15px;
+    font-weight: bold;
+    color: #222;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 13px 15px;
+    border: 1px solid #d7dce2;
+    border-radius: 9px;
+    font-size: 15px;
+    background: #fff;
+    transition: 0.2s;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0,123,255,0.12);
+}
+
+.form-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 28px;
+}
+
+.btn-save,
+.btn-cancel {
+    flex: 1;
+    padding: 13px;
+    border-radius: 9px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    border: none;
+}
+
+.btn-save {
+    background: #007bff;
+    color: white;
+}
+
+.btn-save:hover {
+    background: #0056b3;
+}
+
+.btn-cancel {
+    background: #e9ecef;
+    color: #333;
+}
+
+.btn-cancel:hover {
+    background: #dfe3e7;
+}
+
+@media (max-width: 600px) {
+    .add-page {
+        padding: 25px 15px;
+    }
+
+    .add-card {
+        padding: 28px 22px;
+    }
+
+    .add-header h1 {
+        font-size: 27px;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+}
+</style>
+</head>
+
 <body>
-<script src="script.js"></script><script>requireLogin();</script><nav class="navbar"></nav>
-<main class="container"><section class="header"><h1>Tambah Siswa</h1></section>
-<div class="panel"><form id="siswaForm"><div class="form-grid"><div><label>NIS</label><input id="nis" required></div><div><label>Nama</label><input id="nama" required></div><div><label>Kelas</label><input id="kelas" required placeholder="Contoh: 10 RPL 2"></div></div><button type="submit">Simpan</button> <a class="btn secondary" href="tampil_siswa.html">Batal</a></form></div></main>
-<script>renderNavbar(); document.getElementById("siswaForm").addEventListener("submit",function(e){e.preventDefault();let s=JSON.parse(localStorage.getItem("siswa")||"[]");s.push({id:Date.now().toString(),nis:nis.value.trim(),nama:nama.value.trim(),kelas:kelas.value.trim()});localStorage.setItem("siswa",JSON.stringify(s));location.href="tampil_siswa.html";});</script>
-</body></html>
+
+<script src="script.js"></script>
+<script>
+requireLogin();
+</script>
+
+<nav class="navbar"></nav>
+
+<main class="add-page">
+
+    <div class="add-card">
+
+        <div class="add-header">
+            <h1>Tambah Siswa</h1>
+            <p>Tambahkan data siswa baru ke dalam Absenku.</p>
+        </div>
+
+        <form id="siswaForm">
+
+            <div class="form-group">
+                <label for="nis">NIS</label>
+                <input
+                    type="text"
+                    id="nis"
+                    placeholder="Masukkan NIS siswa"
+                    required>
+            </div>
+
+            <div class="form-group">
+                <label for="nama">Nama Siswa</label>
+                <input
+                    type="text"
+                    id="nama"
+                    placeholder="Masukkan nama lengkap siswa"
+                    required>
+            </div>
+
+            <div class="form-group">
+                <label for="kelas">Kelas</label>
+                <input
+                    type="text"
+                    id="kelas"
+                    placeholder="Contoh: XI RPL-2"
+                    required>
+            </div>
+
+            <div class="form-actions">
+
+                <button
+                    type="submit"
+                    class="btn-save">
+                    Simpan Siswa
+                </button>
+
+                <a
+                    href="tampil_siswa.html"
+                    class="btn-cancel">
+                    Batal
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</main>
+
+<script>
+renderNavbar();
+
+document
+    .getElementById("siswaForm")
+    .addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        const nis =
+            document
+                .getElementById("nis")
+                .value
+                .trim();
+
+        const nama =
+            document
+                .getElementById("nama")
+                .value
+                .trim();
+
+        const kelas =
+            document
+                .getElementById("kelas")
+                .value
+                .trim();
+
+        if (!nis || !nama || !kelas) {
+            alert("Semua data siswa wajib diisi.");
+            return;
+        }
+
+        const siswa =
+            JSON.parse(
+                localStorage.getItem("siswa") || "[]"
+            );
+
+        const nisSudahAda =
+            siswa.some(function(item) {
+                return item.nis === nis;
+            });
+
+        if (nisSudahAda) {
+            alert("NIS tersebut sudah terdaftar.");
+            return;
+        }
+
+        siswa.push({
+            id: Date.now().toString(),
+            nis: nis,
+            nama: nama,
+            kelas: kelas
+        });
+
+        localStorage.setItem(
+            "siswa",
+            JSON.stringify(siswa)
+        );
+
+        alert("Data siswa berhasil ditambahkan.");
+
+        location.href = "tampil_siswa.html";
+    });
+</script>
+
+</body>
+</html>
