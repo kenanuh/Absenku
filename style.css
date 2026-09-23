@@ -1,3 +1,159 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7fb;
+    color: #111;
+}
+
+.navbar {
+    background: #007bff;
+    display: flex;
+    align-items: center;
+    padding: 0 30px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.navbar-brand {
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 17px 0;
+    margin-right: 30px;
+}
+
+.navbar-menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex: 1;
+}
+
+.navbar-menu li a {
+    display: block;
+    color: rgba(255,255,255,0.9);
+    text-decoration: none;
+    padding: 20px 18px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.navbar-menu li a:hover,
+.navbar-menu li a.active {
+    background: rgba(255,255,255,0.2);
+    color: white;
+}
+
+.navbar-user {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: white;
+    font-size: 14px;
+}
+
+.btn-logout {
+    background: #dc3545;
+    color: white !important;
+    text-decoration: none;
+    padding: 8px 14px;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 35px auto;
+}
+
+.header {
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    margin-bottom: 8px;
+    font-size: 38px;
+}
+
+.header p {
+    color: #777;
+    font-size: 18px;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+}
+
+.card h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+.card-number {
+    font-size: 36px;
+    font-weight: bold;
+    color: #007bff;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 9px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+select,
+input[type="date"],
+input[type="file"],
+textarea {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #d8d8d8;
+    border-radius: 8px;
+    font-size: 16px;
+    background: white;
+}
+
+select:focus,
+input:focus,
+textarea:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+textarea {
+    min-height: 110px;
+    resize: vertical;
+    font-family: Arial, sans-serif;
+}
+
 .optional-section {
     display: none;
     margin-top: 10px;
@@ -29,4 +185,112 @@
     border-radius: 8px;
     border: 1px solid #ddd;
     object-fit: contain;
+}
+
+.btn,
+.btn-submit {
+    display: inline-block;
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn:hover,
+.btn-submit:hover {
+    background: #0056b3;
+}
+
+.danger {
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.danger:hover {
+    background: #b02a37;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+th,
+td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+th {
+    background: #f5f6f8;
+}
+
+tr[data-link] {
+    cursor: pointer;
+}
+
+tr[data-link]:hover {
+    background: #f7f9fc;
+}
+
+.empty {
+    color: #777;
+    text-align: center;
+}
+
+@media (max-width: 800px) {
+    .navbar {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .navbar-brand {
+        margin-right: 0;
+    }
+
+    .navbar-menu {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .navbar-menu li a {
+        padding: 12px;
+    }
+
+    .navbar-user {
+        margin: 10px 0;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .container {
+        width: 94%;
+    }
+
+    .card {
+        padding: 22px;
+    }
 }
